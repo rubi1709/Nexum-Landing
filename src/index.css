@@ -1,0 +1,9 @@
+/* El diseño completo vive en App.css (copia del <style> de old/index.html).
+   Este archivo solo hace que el contenedor de montaje de React se comporte
+   como el <body> del HTML original, sin modificar ninguna regla original. */
+#root{
+  display:flex;
+  flex-direction:column;
+  flex:1;
+  min-height:0;
+}
