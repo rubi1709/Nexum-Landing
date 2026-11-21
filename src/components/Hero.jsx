@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import HeroCarousel from './HeroCarousel.jsx'
 
 const chips = ['Sin conexión bancaria', 'Registro por voz', 'Rachas de ahorro']
 
@@ -52,12 +53,7 @@ export default function Hero() {
       </section>
 
       <div className="art">
-        <img
-          src={`${import.meta.env.BASE_URL}img/hero-ahorro.png`}
-          alt="Alcancía rosa con monedas y la app Nexum mostrando el saldo disponible y las metas de ahorro"
-          width="1200"
-          height="800"
-        />
+        <HeroCarousel />
       </div>
     </main>
   )
