@@ -2,31 +2,31 @@ import { useEffect, useState } from 'react'
 
 const slides = [
   {
-    src: `${import.meta.env.BASE_URL}img/ahorro-1.jpg`,
-    alt: 'Pareja latina sonriendo mientras deposita monedas en una alcancía en un ambiente cálido',
+    archivo: 'ahorro-1.jpg',
     titulo: 'Ahorrar en pareja se disfruta más.',
+    pos: 'center 30%',
   },
   {
-    src: `${import.meta.env.BASE_URL}img/ahorro-2.jpg`,
-    alt: 'Miniaturas de una casa y un auto junto a monedas apiladas sobre una mesa',
+    archivo: 'ahorro-2.jpg',
     titulo: 'Tu casa y tu auto empiezan con pequeños ahorros.',
+    pos: 'center 45%',
   },
   {
-    src: `${import.meta.env.BASE_URL}img/ahorro-3.jpg`,
-    alt: 'Joven planeando un viaje con un mapa y el dinero que ha ahorrado sobre la mesa',
+    archivo: 'ahorro-3.jpg',
     titulo: 'Ese viaje sí se puede.',
+    pos: 'center 30%',
   },
   {
-    src: `${import.meta.env.BASE_URL}img/ahorro-4.jpg`,
-    alt: 'Estudiante con una laptop y una bicicleta nuevas compradas con sus ahorros',
+    archivo: 'ahorro-4.jpg',
     titulo: 'Tu meta, un ahorro a la vez.',
+    pos: 'center 30%',
   },
 ]
 
+const INTERVALO = 6000
+
 export default function HeroCarousel() {
   const [activo, setActivo] = useState(0)
-  const [hover, setHover] = useState(false)
-  const [foco, setFoco] = useState(false)
   const [fallidos, setFallidos] = useState(() => slides.map(() => false))
   const [reduceMotion, setReduceMotion] = useState(
     () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
@@ -39,67 +39,66 @@ export default function HeroCarousel() {
     return () => media.removeEventListener('change', onChange)
   }, [])
 
-  const pausado = hover || foco
-
   useEffect(() => {
-    if (pausado || reduceMotion) return undefined
-    const id = setInterval(() => setActivo((indice) => (indice + 1) % slides.length), 5000)
+    if (reduceMotion) return undefined
+    const id = setInterval(() => setActivo((indice) => (indice + 1) % slides.length), INTERVALO)
     return () => clearInterval(id)
-  }, [pausado, reduceMotion])
+  }, [reduceMotion])
 
   function marcarFallido(indice) {
     setFallidos((anteriores) => anteriores.map((fallido, i) => (i === indice ? true : fallido)))
   }
 
-  return (
-    <div
-      className="carousel"
-      role="region"
-      aria-roledescription="carrusel"
-      aria-label="Fotos sobre ahorro"
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      onFocus={() => setFoco(true)}
-      onBlur={() => setFoco(false)}
-    >
-      {slides.map((slide, indice) => (
-        <div
-          key={slide.src}
-          className={`carousel__slide${indice === activo ? ' carousel__slide--activo' : ''}`}
-          aria-hidden={indice !== activo}
-        >
-          {fallidos[indice] ? (
-            <div className="carousel__fallback" />
-          ) : (
-            <img
-              className="carousel__media"
-              src={slide.src}
-              alt={slide.alt}
-              width="1200"
-              height="800"
-              loading={indice === 0 ? 'eager' : 'lazy'}
-              fetchPriority={indice === 0 ? 'high' : 'auto'}
-              onError={() => marcarFallido(indice)}
-            />
-          )}
-        </div>
-      ))}
+  function mostrar(indice) {
+    if (reduceMotion) return
+    setActivo(indice)
+  }
 
-      <div className="carousel__veil">
-        <p className="carousel__titulo">{slides[activo].titulo}</p>
+  // Con prefers-reduced-motion se queda siempre la primera foto, sin autoplay ni zoom.
+  const indiceActivo = reduceMotion ? 0 : activo
+
+  return (
+    <>
+      <div className="hero-bg" aria-hidden="true">
+        <div className="hero-bg__slides">
+          {slides.map((slide, indice) => (
+            <div
+              key={slide.archivo}
+              className={`hero-bg__slide${indice === indiceActivo ? ' hero-bg__slide--activo' : ''}`}
+            >
+              {fallidos[indice] ? (
+                <div className="hero-bg__fallback" />
+              ) : (
+                <img
+                  className="hero-bg__media"
+                  src={`${import.meta.env.BASE_URL}img/${slide.archivo}`}
+                  alt=""
+                  style={{ objectPosition: slide.pos }}
+                  loading={indice === 0 ? 'eager' : 'lazy'}
+                  fetchPriority={indice === 0 ? 'high' : 'auto'}
+                  decoding="async"
+                  onError={() => marcarFallido(indice)}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="hero-bg__overlay" />
+        <p className="hero-bg__titulo">{slides[indiceActivo].titulo}</p>
       </div>
 
-      <div className="carousel__dots">
+      <div className="hero-bg__dots">
         {slides.map((slide, indice) => (
           <button
-            key={slide.src}
+            key={slide.archivo}
             type="button"
             aria-label={`Ver imagen ${indice + 1}`}
-            aria-current={indice === activo ? 'true' : undefined}
-            onClick={() => setActivo(indice)}
+            aria-current={indice === indiceActivo ? 'true' : undefined}
+            onClick={() => mostrar(indice)}
           />
         ))}
       </div>
-    </div>
+    </>
   )
 }

@@ -8,6 +8,8 @@ export default function Hero() {
 
   return (
     <main className="page">
+      <HeroCarousel />
+
       <section className="copy">
         <p className="eyebrow">Finanzas personales</p>
         <h1>Convierte pequeños hábitos en <em>ahorro real.</em></h1>
@@ -51,10 +53,6 @@ export default function Hero() {
           {chips.map((chip) => <li key={chip}>{chip}</li>)}
         </ul>
       </section>
-
-      <div className="art">
-        <HeroCarousel />
-      </div>
     </main>
   )
 }
