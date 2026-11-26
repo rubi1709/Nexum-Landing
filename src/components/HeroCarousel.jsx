@@ -4,22 +4,26 @@ const slides = [
   {
     archivo: 'ahorro-1.jpg',
     titulo: 'Ahorrar en pareja se disfruta más.',
-    pos: 'center 30%',
+    posD: 'center 30%',
+    posM: '58% 26%',
   },
   {
     archivo: 'ahorro-2.jpg',
     titulo: 'Tu casa y tu auto empiezan con pequeños ahorros.',
-    pos: 'center 45%',
+    posD: '66% 45%',
+    posM: '34% 50%',
   },
   {
     archivo: 'ahorro-3.jpg',
     titulo: 'Ese viaje sí se puede.',
-    pos: 'center 30%',
+    posD: 'center 28%',
+    posM: '52% 24%',
   },
   {
     archivo: 'ahorro-4.jpg',
     titulo: 'Tu meta, un ahorro a la vez.',
-    pos: 'center 30%',
+    posD: '60% 30%',
+    posM: '58% 26%',
   },
 ]
 
@@ -73,7 +77,7 @@ export default function HeroCarousel() {
                   className="hero-bg__media"
                   src={`${import.meta.env.BASE_URL}img/${slide.archivo}`}
                   alt=""
-                  style={{ objectPosition: slide.pos }}
+                  style={{ '--pos-d': slide.posD, '--pos-m': slide.posM }}
                   loading={indice === 0 ? 'eager' : 'lazy'}
                   fetchPriority={indice === 0 ? 'high' : 'auto'}
                   decoding="async"
