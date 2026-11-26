@@ -5,25 +5,25 @@ const slides = [
     archivo: 'ahorro-1.jpg',
     titulo: 'Ahorrar en pareja se disfruta más.',
     posD: 'center 30%',
-    posM: '72% center',
+    posM: '50% 35%',
   },
   {
     archivo: 'ahorro-2.jpg',
     titulo: 'Tu casa y tu auto empiezan con pequeños ahorros.',
     posD: '66% 45%',
-    posM: '73% center',
+    posM: '58% 35%',
   },
   {
     archivo: 'ahorro-3.jpg',
     titulo: 'Ese viaje sí se puede.',
     posD: 'center 28%',
-    posM: '52% center',
+    posM: '50% 35%',
   },
   {
     archivo: 'ahorro-4.jpg',
     titulo: 'Tu meta, un ahorro a la vez.',
     posD: '60% 30%',
-    posM: '60% center',
+    posM: '58% 35%',
   },
 ]
 
