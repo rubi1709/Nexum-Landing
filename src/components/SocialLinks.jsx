@@ -1,7 +1,7 @@
 const redes = [
   {
     nombre: 'Facebook',
-    url: 'https://www.facebook.com/share/18dqxNAWbr/',
+    url: 'https://www.facebook.com/share/1BF8cwoRG9/',
     icono: (
       <svg viewBox="0 0 24 24" fill="currentColor">
         <path d="M13.5 21v-8h2.7l.4-3.2h-3.1V7.8c0-.9.3-1.5 1.6-1.5h1.6V3.4c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2.4H7.5V13h2.8v8h3.2z" />
