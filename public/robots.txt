@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rubi1709.github.io/Nexum-Landing/sitemap.xml
