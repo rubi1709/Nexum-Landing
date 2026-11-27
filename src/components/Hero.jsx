@@ -18,9 +18,9 @@ export default function Hero() {
         <div className="get">
           <a
             className="play"
-            href="https://play.google.com/store/apps/details?id=mx.nexum.app"
+            href="https://play.google.com/store/apps/details?id=com.nexum.nexum"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
             aria-label="Descargar Nexum en Google Play"
           >
             <svg viewBox="0 0 24 26" aria-hidden="true">
